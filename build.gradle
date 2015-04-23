@@ -23,17 +23,3 @@ test {
 test.doFirst {
     jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }
-
-// Allure tasks
-// TODO: Windows version
-task generateAllureReport(type: Exec) {
-    commandLine 'allure', 'generate', 'build/allure-results', "-v ${allureVersion}", '-o build/reports/allure'
-}
-task openAllureReport(type: Exec) {
-    commandLine 'allure', 'report', 'open', '-o build/reports/allure'
-}
-
-// Generate allure report
-//test.finalizedBy(generateAllureReport)
-
-

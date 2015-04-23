@@ -8,12 +8,32 @@ $ gradle
 ```
 You should see failed tests and generated Allure XML files in **build/allure-results** directory.  
 
-To generate allure report from generated Allure XML files:
+## Report
+To generate report [allure-cli](https://github.com/allure-framework/allure-cli) can be used.
+
+Report generation example:
 ```bash
-$ gradle generateAllureReport
+# Run from the root directory
+$ allure generate build/allure-results -v 1.4.11 -o build/reports/allure
 ```
 
-To open allure report:
+Open report example:
 ```bash
-$ gradle openAllureReport
+$ allure report open -o build/reports/allure
+```
+
+## Automate with Gradle
+
+Report generation can be automated with gradle.
+
+Example:
+```groovy
+task generateAllureReport(type: Exec) {
+    commandLine "allure generate build/allure-results -v ${allureVersion} -o build/reports/allure"
+}
+test.finalizedBy(generateAllureReport)
+
+task openAllureReport(type: Exec) {
+    commandLine "allure report open -o build/reports/allure"
+}
 ```
