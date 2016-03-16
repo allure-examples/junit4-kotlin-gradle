@@ -1,5 +1,5 @@
 # Allure Gradle JUnit Example
-This example demonstrates how to use Allure [JUnit](http://testng.org/) adapter with [Gradle](http://www.gradle.org/) build tool.
+This example demonstrates how to use [Allure JUnit adaptor](https://github.com/allure-framework/allure-core/wiki/JUnit) with [Gradle](http://www.gradle.org/) build tool.
 
 ## Usage
 To launch this example install Gradle and run the following command from the root directory:
