@@ -1,25 +1,29 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "io.qameta.allure:allure-gradle:2.5"
+    }
+}
+
 apply plugin: 'java'
-sourceCompatibility = JavaVersion.VERSION_1_7
-targetCompatibility = JavaVersion.VERSION_1_7
-version = '1.0-SNAPSHOT'
-defaultTasks 'clean', 'test'
+apply plugin: 'io.qameta.allure'
 
 repositories {
     mavenCentral()
 }
 
-configurations {
-    agent
-}
+allure {
+    autoconfigure = true
+    version = '2.6.0'
 
-dependencies {
-    agent "org.aspectj:aspectjweaver:${aspectjVersion}"
-    testCompile "ru.yandex.qatools.allure:allure-junit-adaptor:${allureVersion}"
+    useJUnit4 {
+        version = '2.6.0'
+    }
+
 }
 
 test {
     useJUnit()
-}
-test.doFirst {
-    jvmArgs "-javaagent:${configurations.agent.singleFile}"
 }

@@ -1,24 +1,35 @@
 package ru.yandex.qatools.allure.junit;
 
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
+import io.qameta.allure.junit4.DisplayName;
 import org.junit.Test;
-import ru.yandex.qatools.allure.annotations.Description;
-import ru.yandex.qatools.allure.annotations.Title;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
-@Description("This is an example test suite")
-public class ExampleTestSuite extends BaseTest {
+public class ExampleTestSuite {
 
-    @Title("Failing test")
     @Test
+    @DisplayName("Failing test")
+    @Description("This is an example test suite")
     public void failingTest() {
         assertThat(1, equalTo(2));
     }
 
-    @Title("Successful test")
     @Test
+    @DisplayName("Successful test")
     public void successfulTest() {
-        assertThat(2, equalTo(2));
+        firstStep();
+    }
+
+    @Step
+    private void firstStep() {
+        secondStep();
+    }
+
+    @Step
+    private void secondStep() {
+
     }
 }
