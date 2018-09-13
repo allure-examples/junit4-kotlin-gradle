@@ -34,6 +34,9 @@ task generateAllureReport(type: Exec) {
 test.finalizedBy(generateAllureReport)
 
 task openAllureReport(type: Exec) {
-    commandLine "allure report open -o build/reports/allure"
+    commandLine "allure"
+    args "report", "open", "-o", "build/reports/allure"
 }
+
+
 ```
