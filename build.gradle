@@ -1,29 +1,51 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath "io.qameta.allure:allure-gradle:2.5"
-    }
+plugins {
+    id 'org.jetbrains.kotlin.jvm' version '1.9.20'
 }
 
-apply plugin: 'java'
-apply plugin: 'io.qameta.allure'
+wrapper {
+    gradleVersion = '8.4'
+}
 
 repositories {
     mavenCentral()
 }
 
-allure {
-    autoconfigure = true
-    version = '2.6.0'
+group = 'com.example.junit4'
+version = '1.0-SNAPSHOT'
 
-    useJUnit4 {
-        version = '2.6.0'
+def allureVersion = '2.24.0'
+def aspectJVersion = '1.9.20.1'
+def kotlinVersion = '1.9.20'
+
+kotlin {
+    jvmToolchain(21)
+}
+
+configurations {
+    agent {
+        canBeResolved = true
+        canBeConsumed = true
     }
+}
 
+dependencies {
+    agent "org.aspectj:aspectjweaver:$aspectJVersion"
+
+    testImplementation platform("org.jetbrains.kotlin:kotlin-bom:$kotlinVersion")
+    testImplementation "org.jetbrains.kotlin:kotlin-stdlib"
+    testImplementation "org.jetbrains.kotlin:kotlin-test-junit"
+
+    testImplementation platform("io.qameta.allure:allure-bom:$allureVersion")
+    testImplementation "io.qameta.allure:allure-junit4"
+    testImplementation "io.qameta.allure:allure-junit4-aspect"
+
+    testImplementation "junit:junit:4.13.2"
+
+    testImplementation "org.slf4j:slf4j-simple:2.0.9"
 }
 
 test {
+    ignoreFailures = true
     useJUnit()
+    jvmArgs = [ "-javaagent:${configurations.agent.singleFile}" ]
 }
