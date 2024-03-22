@@ -1,9 +1,9 @@
 plugins {
-    id 'org.jetbrains.kotlin.jvm' version '1.9.22'
+    id 'org.jetbrains.kotlin.jvm' version '1.9.23'
 }
 
 wrapper {
-    gradleVersion = '8.5'
+    gradleVersion = '8.6'
 }
 
 repositories {
@@ -15,7 +15,7 @@ version = '1.0-SNAPSHOT'
 
 def allureVersion = '2.25.0'
 def aspectJVersion = '1.9.21'
-def kotlinVersion = '1.9.22'
+def kotlinVersion = '1.9.23'
 
 kotlin {
     jvmToolchain(21)
@@ -41,7 +41,7 @@ dependencies {
 
     testImplementation "junit:junit:4.13.2"
 
-    testImplementation "org.slf4j:slf4j-simple:2.0.9"
+    testImplementation "org.slf4j:slf4j-simple:2.0.12"
 }
 
 test {
